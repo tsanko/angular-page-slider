@@ -1,0 +1,128 @@
+@mixin vcenterer {
+	position  : absolute;
+	top       : 50%;
+	transform : translateY(-50%);
+}
+
+@mixin hcenterer {
+	position  : absolute;
+	left      : 50%;
+	transform : translateX(-50%);
+}
+
+@mixin centerer {
+	position  : absolute;
+	top       : 50%;
+	left      : 50%;
+	transform : translate(-50%, -50%);
+}
+
+@mixin respond-for($device) {
+	// Semantic name to id device we want to respond for.
+	// These are taken from bootstraps default mq sizes.
+	// But, I didn't want to use thier vars in case we remove bootstrap
+	//
+	// retina-phone  --> retina phones
+	// phone         --> xs devices
+	// tablet        --> sm devices
+	// desktop       --> md devices
+	// wide-screen   --> Wide screens
+
+	@if($device == phone) {
+		@media only screen and (min-width : 320px) {
+			@content;
+		}
+	} @else if($device == tablet) { // Portrait triggers this in testing
+		@media only screen and (min-width : 768px) {
+			@content;
+		}
+	} @else if($device == desktop) { // Tablet landscape also triggers this
+		@media only screen and (min-width : 992px) {
+			@content;
+		}
+	} @else if($device == wide-screen) {
+		@media only screen and (min-width : 1200px) {
+			@content;
+		}
+	}
+}
+
+@mixin respond-to($viewport-size) {
+	@if ($viewport-size == xxs) {
+		@media only screen and (max-width : $screen-xxs-max) {
+			@content;
+		}
+	} @else if ($viewport-size == xs) {
+		@media only screen and (max-width : $screen-xs-max) {
+			@content;
+		}
+	} @else if ($viewport-size == sm) {
+		@media only screen and (min-width : $screen-sm-min) and (max-width : $screen-sm-max) {
+			@content;
+		}
+	} @else if ($viewport-size == sm-and-up) {
+		@media only screen and (min-width : $screen-sm-min) {
+			@content;
+		}
+	} @else if ($viewport-size == sm-and-down) {
+		@media only screen and (max-width : $screen-sm-max) {
+			@content;
+		}
+	} @else if ($viewport-size == md) {
+		@media only screen and (min-width : $screen-md-min) and (max-width : $screen-md-max) {
+			@content;
+		}
+	} @else if ($viewport-size == md-and-up) {
+		@media only screen and (min-width : $screen-md-min) {
+			@content;
+		}
+	} @else if ($viewport-size == lg) {
+		@media only screen and (min-width : $screen-lg-min) and (max-width : $screen-lg-max) {
+			@content;
+		}
+	} @else if ($viewport-size == lg-and-up) {
+		@media only screen and (min-width : $screen-lg-min) {
+			@content;
+		}
+	} @else if ($viewport-size == xl) {
+		@media only screen and (min-width : $screen-xl-min) {
+			@content;
+		}
+	} @else if($viewport-size == phone) {
+		@media only screen and (max-width : $screen-xs-max) {
+			@content;
+		}
+	} @else if($viewport-size == tablet) {
+		@media only screen and (min-width : $screen-sm-min) and (max-width : $screen-sm-max) {
+			@content;
+		}
+	} @else if($viewport-size == desktop) {
+		@media only screen and (min-width : $screen-md-min) and (max-width : $screen-md-max) {
+			@content;
+		}
+	} @else if($viewport-size == widescreen) {
+		@media only screen and (min-width : $screen-lg-min) {
+			@content;
+		}
+	}
+}
+
+// Shapes
+@mixin square($length) {
+	width  : $length;
+	height : $length;
+}
+
+@mixin rectangle($length, $width) {
+	width  : $width;
+	height : $height;
+}
+
+@mixin circle($size, $background) {
+	width                 : $size;
+	height                : $size;
+	background            : $background;
+	-moz-border-radius    : $size / 2;
+	-webkit-border-radius : $size / 2;
+	border-radius         : $size / 2;
+}

@@ -1,0 +1,38 @@
+{
+  "name": "angular-page-slider",
+  "version": "0.0.1",
+  "homepage": "https://github.com/tsanko/angular-page-slider.git",
+  "authors": [
+    "Tsanko Tsolov"
+  ],
+  "description": "AngularJS directive for sliding 2-dimensional array of HTML pages",
+  "main": [
+    "dist/angular-page-slider.js",
+    "dist/angular-page-slider.css"
+  ],
+  "keywords": [
+    "angular",
+    "slider",
+    "html"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jquery": "~2.1.4",
+    "angular": "~1.4.0",
+    "angular-animate": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "compass-mixins": "~1.0.2",
+    "gsap": "~1.17.0",
+    "font-awesome": "~4.4.0",
+    "angular-swipe": "~0.1.0"
+  }
+}

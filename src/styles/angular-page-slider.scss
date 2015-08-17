@@ -1,9 +1,7 @@
-
 // bower:scss
 @import "compass-mixins/lib/_compass.scss";
 @import "font-awesome/scss/font-awesome.scss";
 // endbower
-
 @import "vars";
 @import "helpers";
 
@@ -103,28 +101,20 @@
 
 		@include vcenterer;
 
-		position     : absolute;
-		z-index      : 1002;
-		display      : block;
-		color        : grey;
-		width        : 36px;
-		height       : 71px;
-		outline      : none;
-		cursor       : pointer;
-		font-family  : 'Rex';
-		font-size    : 100px;
-		margin-top   : -50px;
-		margin-right : 10px;
-
-		@include respond-to(sm-and-down) {
-			top : 50%;
-		}
+		position    : absolute;
+		z-index     : 1002;
+		display     : block;
+		color       : grey;
+		outline     : none;
+		cursor      : pointer;
+		font-family : 'Rex';
+		font-size   : 60px;
+		opacity     : 0.7;
+		transition  : 0.2s linear all;
 	}
 
 	.arrow.prev {
-		opacity    : 0.5;
 		left       : 0;
-		transition : 0.2s linear all;
 
 		&:hover {
 			opacity : 1;
@@ -132,9 +122,7 @@
 	}
 
 	.arrow.next {
-		opacity    : 0.5;
-		right      : 25px;
-		transition : 0.2s linear all;
+		right      : 0;
 
 		&:hover {
 			opacity : 1;
@@ -145,10 +133,8 @@
 
 		@include hcenterer;
 
-		opacity    : 0.5;
-		top        : 25px;
+		top        : 0;
 		bottom     : auto;
-		transition : 0.2s linear all;
 
 		&:hover {
 			opacity : 1;
@@ -159,10 +145,8 @@
 
 		@include hcenterer;
 
-		opacity    : 0.5;
 		top        : auto;
-		bottom     : 25px;
-		transition : 0.2s linear all;
+		bottom     : 0;
 
 		&:hover {
 			opacity : 1;

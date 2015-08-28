@@ -6,8 +6,10 @@ module.exports = function (grunt) {
 	// Configurable paths
 	var yoConfig = {
 		livereload: 35729,
+		app       : require('./bower.json').name,
 		src       : 'src',
-		dist      : 'dist'
+		dist      : 'dist',
+		tmp       : '.tmp'
 	};
 
 	// Livereload setup
@@ -21,9 +23,9 @@ module.exports = function (grunt) {
 
 	// Project configuration
 	grunt.initConfig({
-		pkg    : grunt.file.readJSON('package.json'),
-		yo     : yoConfig,
-		meta   : {
+		pkg       : grunt.file.readJSON('package.json'),
+		yo        : yoConfig,
+		meta      : {
 			banner: '/**\n' +
 			' * <%= pkg.name %>\n' +
 			' * @version v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
@@ -32,12 +34,12 @@ module.exports = function (grunt) {
 			' * @license MIT License, http://www.opensource.org/licenses/MIT\n' +
 			' */\n'
 		},
-		open   : {
+		open      : {
 			server: {
 				path: 'http://localhost:<%= connect.options.port %>'
 			}
 		},
-		clean  : {
+		clean     : {
 			dist  : {
 				files: [{
 					dot: true,
@@ -50,15 +52,15 @@ module.exports = function (grunt) {
 			},
 			server: '.tmp'
 		},
-		watch  : {
+		watch     : {
 			gruntfile: {
 				files: '<%= jshint.gruntfile.src %>',
 				tasks: ['jshint:gruntfile']
 			},
-			less     : {
-				files: ['<%= yo.src %>/{,*/}*.less'],
-				tasks: ['less:dist']
-			},
+			//less     : {
+			//	files: ['<%= yo.src %>/{,*/}*.less'],
+			//	tasks: ['less:dist']
+			//},
 			app      : {
 				files  : [
 					'<%= yo.src %>/{,*/}*.html',
@@ -74,7 +76,7 @@ module.exports = function (grunt) {
 				tasks: ['jshint:test', 'qunit']
 			}
 		},
-		connect: {
+		connect   : {
 			options   : {
 				port    : 9000,
 				hostname: '0.0.0.0' // Change this to '0.0.0.0' to access the server from outside.
@@ -91,18 +93,18 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-		sass   : {
+		sass      : {
 			options: {
 				//debugInfo   : true
-				style: 'expanded',
-				sourcemap : 'none'   // 'auto'
+				style    : 'expanded',
+				sourcemap: 'none'   // 'auto'
 			},
 			dist   : {
 				files: [
 					{
 						expand: true,
-						cwd   : '<%= yo.src %>',
-						src   : ['*.scss'],
+						cwd   : '<%= yo.src %>/styles',
+						src   : ['<%= yo.app %>.scss'],
 						dest  : '<%= yo.dist %>',
 						ext   : '.css'
 					}
@@ -113,25 +115,25 @@ module.exports = function (grunt) {
 					{
 						expand: true,
 						cwd   : '<%= yo.src %>',
-						src   : ['*.scss'],
+						src   : ['styles/<%= yo.app %>.scss'],
 						dest  : '.tmp/styles',
 						ext   : '.css'
 					}
 				]
 			}
 		},
-		cssmin: {
-			target: {
+		cssmin    : {
+			generated: {
 				files: [{
 					expand: true,
-					cwd: '<%= yo.dist %>',
-					src: ['*.css', '!*.min.css'],
-					dest: '<%= yo.dist %>',
-					ext: '.min.css'
+					cwd   : '<%= yo.dist %>',
+					src   : ['*.css', '!*.min.css'],
+					dest  : '<%= yo.dist %>',
+					ext   : '.min.css'
 				}]
 			}
 		},
-		jshint : {
+		jshint    : {
 			gruntfile: {
 				options: {
 					jshintrc: '.jshintrc'
@@ -151,7 +153,7 @@ module.exports = function (grunt) {
 				src    : ['test/**/*.js']
 			}
 		},
-		jscs   : {
+		jscs      : {
 			src    : '<%= yo.src %>/{,*/}*.js',
 			options: {
 				config            : '.jscsrc',
@@ -160,35 +162,37 @@ module.exports = function (grunt) {
 				requireCurlyBraces: ['if']
 			}
 		},
-		karma  : {
+		karma     : {
 			options: {
 				configFile: 'test/karma.conf.js',
 				browsers  : ['PhantomJS']
 			},
 			unit   : {
 				configFile: 'test/karma.conf.js',
-				singleRun: true
+				singleRun : true
 			},
 			server : {
 				autoWatch: true
 			}
 		},
-		concat : {
+
+		concat    : {
 			options: {
 				banner      : '<%= meta.banner %>',
 				stripBanners: true
 			},
 			dist   : {
-				src : ['<%= yo.src %>/<%= pkg.name %>.js'],
+				src : ['<%= yo.src %>/*.js'],
 				dest: '<%= yo.dist %>/<%= pkg.name %>.js'
 			}
 		},
-		uglify : {
+
+		uglify    : {
 			options: {
 				banner: '<%= meta.banner %>'
 			},
 			dist   : {
-				src : '<%= concat.dist.dest %>',
+				src : '<%= yo.dist %>/<%= pkg.name %>.js',
 				dest: '<%= yo.dist %>/<%= pkg.name %>.min.js'
 			}
 		},
@@ -199,13 +203,115 @@ module.exports = function (grunt) {
 				files: [
 					{
 						expand: true,
-						cwd   : '.tmp/concat/scripts',
+						cwd   : '<%= yo.dist %>',
 						src   : ['*.js'],
-						dest  : '.tmp/concat/scripts'
+						dest  : '<%= yo.dist %>'
 					}
 				]
 			}
 		},
+		// Copies remaining files to places other tasks can use
+		copy      : {
+			dist  : {
+				files: [{
+					expand: true,
+					dot   : true,
+					cwd   : '<%= yo.src %>',
+					dest  : '<%= yo.dist %>',
+					src   : [
+						'*.{ico,png,txt}',
+						'.htaccess',
+						'*.html',
+						'images/{,*/}*.{webp}',
+						'styles/fonts/{,*/}*.*'
+					]
+				}, {
+					expand: true,
+					cwd   : '<%= yo.tmp %>/images',
+					dest  : '<%= yo.dist %>/images',
+					src   : ['generated/*']
+				}, {
+					expand: true,
+					cwd   : '.',
+					src   : [
+						'bower_components/font-awesome/fonts/*'
+					],
+					dest  : '<%= yo.dist %>'
+				}]
+			},
+			styles: {
+				expand: true,
+				cwd   : '<%= yo.src %>/styles',
+				dest  : '<%= yo.tmp %>/styles/',
+				src   : '{,*/}*.css'
+			},
+			fonts : {
+				expand: true,
+				cwd   : 'bower_components/font-awesome/fonts',
+				dest  : '.tmp/fonts/',
+				src   : '*'
+			}
+		}
+
+		// Reads HTML for usemin blocks to enable smart builds that automatically
+		// concat, minify and revision files. Creates configurations in memory so
+		// additional tasks can operate on them
+		//useminPrepare: {
+		//	//html   : '<%= yo.app %>/index.html',
+		//	options: {
+		//		dest: '<%= yo.dist %>',
+		//		flow: {
+		//			html: {
+		//				steps: {
+		//					js : ['concat', 'uglifyjs'],
+		//					css: ['cssmin']
+		//				},
+		//				post : {}
+		//			}
+		//		}
+		//	}
+		//},
+
+		// Performs rewrites based on filerev and the useminPrepare configuration
+		//usemin: {
+		//	html   : ['<%= yo.dist %>/{,*/}*.html'],
+		//	css    : ['<%= yo.dist %>/{,*/}*.css'],
+		//	js     : ['<%= yo.dist %>/{,*/}*.js'],
+		//	options: {
+		//		assetsDirs: [
+		//			'<%= yo.dist %>',
+		//			'<%= yo.dist %>/images'
+		//		],
+		//		patterns  : {
+		//			js: [[/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
+		//		}
+		//	}
+		//},
+
+		//htmlmin: {
+		//	options: {
+		//		collapseWhitespace       : true,
+		//		conservativeCollapse     : true,
+		//		collapseBooleanAttributes: true,
+		//		removeCommentsFromCDATA  : true
+		//	},
+		//	server : {
+		//		files: [{
+		//			expand: true,
+		//			cwd   : '<%= yo.src %>',
+		//			src   : ['*.html', 'views/{,*/}*.html', 'scripts/**/.*.html'],
+		//			dest  : '.tmp'
+		//		}]
+		//	},
+		//	dist: {
+		//		files  : [{
+		//			expand: true,
+		//			cwd   : '<%= yo.dist %>',
+		//			src   : ['*.html'],
+		//			dest  : '<%= yo.dist %>'
+		//		}]
+		//	}
+		//}
 	});
 
 	grunt.registerTask('test', [
@@ -216,10 +322,14 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('build', [
 		'clean:dist',
+		//'useminPrepare',
 		'sass:dist',
+		'concat',
 		'cssmin',
 		'ngAnnotate',
+		'copy:dist',
 		'uglify:dist'
+		//'usemin'
 	]);
 
 	grunt.registerTask('release', [

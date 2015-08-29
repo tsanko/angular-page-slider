@@ -34,6 +34,11 @@ function SliderController($timeout) {
 	that.showUp = false;
 	that.showDown = false;
 
+	that.nextLabel = '';
+	that.prevLabel = '';
+	that.upLabel = '';
+	that.downLabel = '';
+
 	that.getAdditionalStyleNames = getAdditionalStyleNames;
 
 	init();
@@ -54,6 +59,22 @@ function SliderController($timeout) {
 		that.showUp = (that.currentMainIndex !== 0 && that.currentSubIndex === -1);
 
 		that.showDown = (that.currentMainIndex !== that.slides.length - 1 && that.currentSubIndex === -1);
+
+		that.nextLabel = (that.showNext) ?
+			that.slides[that.currentMainIndex].subslides[that.currentSubIndex + 1].name :
+			'';
+
+		that.prevLabel = (that.showPrev && that.currentSubIndex !== -1) ?
+			that.slides[that.currentMainIndex].subslides[that.currentSubIndex - 1].name :
+			that.slides[that.currentMainIndex].name;
+
+		that.upLabel = (that.showUp) ?
+			that.slides[that.currentMainIndex - 1].name :
+			'';
+
+		that.downLabel = (that.showDown) ?
+			that.slides[that.currentMainIndex + 1].name :
+			'';
 	}
 
 	function getAdditionalStyleNames() {

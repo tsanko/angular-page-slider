@@ -43,12 +43,14 @@ angular
 				   'ng-click="slider.prevSlide()" >' +
 
 					'<i class="fa fa-chevron-left"></i>' +
+					'<div class="label">{{ slider.prevLabel }}</div>' +
 				'</a>' +
 
 				'<a class="arrow next" href ' +
 				   'ng-if="slider.showNext" ' +
 				   'ng-click="slider.nextSlide()" >' +
 
+					'<div class="label">{{ slider.nextLabel }}</div>' +
 					'<i class="fa fa-chevron-right"></i>' +
 				'</a>' +
 
@@ -57,12 +59,14 @@ angular
 				   'ng-click="slider.upSlide()" >' +
 
 					'<i class="fa fa-chevron-up"></i>' +
+					'<div class="label">{{ slider.upLabel }}</div>' +
 				'</a>' +
 
 				'<a class="arrow down" href ' +
 				   'ng-if="slider.showDown" ' +
 				   'ng-click="slider.downSlide()" >' +
 
+					'<div class="label">{{ slider.downLabel }}</div>' +
 					'<i class="fa fa-chevron-down"></i>' +
 				'</a>' +
 

@@ -26,8 +26,6 @@
 		}
 
 		&-content {
-			margin : 10px;
-
 			&.-fade-out {
 				opacity : 0;
 			}
@@ -114,7 +112,6 @@
 		color           : grey;
 		outline         : none;
 		cursor          : pointer;
-		font-family     : 'Rex';
 		font-size       : 45px;
 		text-decoration : none;
 		text-align      : center;
@@ -132,7 +129,9 @@
 		.label {
 			@extend %label;
 			transform : rotate(90deg);
-			left      : 20px;
+			width     : 200px;
+			top       : 15px;
+			left      : -50px;
 			position  : absolute;
 		}
 	}
@@ -147,8 +146,10 @@
 		.label {
 			@extend %label;
 			transform : rotate(-90deg);
-			right     : 20px;
+			right     : -50px;
 			position  : absolute;
+			width     : 200px;
+			top       : 15px;
 		}
 	}
 

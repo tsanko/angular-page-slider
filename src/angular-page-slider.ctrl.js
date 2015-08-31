@@ -51,20 +51,20 @@ function SliderController($timeout) {
 
 	function setupLayoutChevrons() {
 		that.showNext = (that.slides[that.currentMainIndex].subslides.length !== 0 &&
-						 that.slides[that.currentMainIndex].subslides.length - 1 !== that.currentSubIndex);
+		that.slides[that.currentMainIndex].subslides.length - 1 !== that.currentSubIndex);
 
 		that.showPrev = (that.slides[that.currentMainIndex].subslides.length !== 0 &&
-						 that.currentSubIndex !== -1);
+		that.currentSubIndex !== -1);
 
 		that.showUp = (that.currentMainIndex !== 0 && that.currentSubIndex === -1);
 
 		that.showDown = (that.currentMainIndex !== that.slides.length - 1 && that.currentSubIndex === -1);
 
-		that.nextLabel = (that.showNext) ?
+		that.nextLabel = (that.showNext && that.currentSubIndex < that.slides[that.currentMainIndex].subslides.length) ?
 			that.slides[that.currentMainIndex].subslides[that.currentSubIndex + 1].name :
 			'';
 
-		that.prevLabel = (that.showPrev && that.currentSubIndex !== -1) ?
+		that.prevLabel = (that.showPrev && that.currentSubIndex > 0) ?
 			that.slides[that.currentMainIndex].subslides[that.currentSubIndex - 1].name :
 			that.slides[that.currentMainIndex].name;
 

@@ -182,7 +182,7 @@ module.exports = function (grunt) {
 				stripBanners: true
 			},
 			dist   : {
-				src : ['<%= yo.src %>/*.js'],
+				src : ['<%= yo.src %>/**/*.js'],
 				dest: '<%= yo.dist %>/<%= pkg.name %>.js'
 			}
 		},
@@ -222,7 +222,7 @@ module.exports = function (grunt) {
 						'*.{ico,png,txt}',
 						'.htaccess',
 						'*.html',
-						'images/{,*/}*.{webp}',
+						'images/{,*/}*.{svg,webp}',
 						'styles/fonts/{,*/}*.*'
 					]
 				}, {
@@ -230,13 +230,6 @@ module.exports = function (grunt) {
 					cwd   : '<%= yo.tmp %>/images',
 					dest  : '<%= yo.dist %>/images',
 					src   : ['generated/*']
-				}, {
-					expand: true,
-					cwd   : '.',
-					src   : [
-						'bower_components/font-awesome/fonts/*'
-					],
-					dest  : '<%= yo.dist %>'
 				}]
 			},
 			styles: {
@@ -244,12 +237,6 @@ module.exports = function (grunt) {
 				cwd   : '<%= yo.src %>/styles',
 				dest  : '<%= yo.tmp %>/styles/',
 				src   : '{,*/}*.css'
-			},
-			fonts : {
-				expand: true,
-				cwd   : 'bower_components/font-awesome/fonts',
-				dest  : '.tmp/fonts/',
-				src   : '*'
 			}
 		}
 

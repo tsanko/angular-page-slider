@@ -1,6 +1,6 @@
 /**
  * angular-page-slider
- * @version v0.0.5 - 2015-08-31
+ * @version v0.0.5 - 2015-09-01
  * @link https://github.com/tsanko/angular-page-slider
  * @author Tsanko Tsolov <>
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -378,7 +378,7 @@ angular
 				   'ng-if="slider.showPrev" ' +
 				   'ng-click="slider.prevSlide()" >' +
 
-					'<i class="fa fa-chevron-left"></i>' +
+					'<svg-image src="bower_components/angular-page-slider/dist/images/chevron.svg" class="chevron" ></svg-image>' +
 					'<div class="label">{{ slider.prevLabel }}</div>' +
 				'</a>' +
 
@@ -387,14 +387,14 @@ angular
 				   'ng-click="slider.nextSlide()" >' +
 
 					'<div class="label">{{ slider.nextLabel }}</div>' +
-					'<i class="fa fa-chevron-right"></i>' +
+					'<svg-image src="bower_components/angular-page-slider/dist/images/chevron.svg" class="chevron" ></svg-image>' +
 				'</a>' +
 
 				'<a class="arrow up" href ' +
 				   'ng-if="slider.showUp" ' +
 				   'ng-click="slider.upSlide()" >' +
 
-					'<i class="fa fa-chevron-up"></i>' +
+					'<svg-image src="bower_components/angular-page-slider/dist/images/chevron.svg" class="chevron" ></svg-image>' +
 					'<div class="label">{{ slider.upLabel }}</div>' +
 				'</a>' +
 
@@ -403,7 +403,7 @@ angular
 				   'ng-click="slider.downSlide()" >' +
 
 					'<div class="label">{{ slider.downLabel }}</div>' +
-					'<i class="fa fa-chevron-down"></i>' +
+					'<svg-image src="bower_components/angular-page-slider/dist/images/chevron.svg" class="chevron" ></svg-image>' +
 				'</a>' +
 
 				'<div class="main-map">' +
@@ -439,3 +439,43 @@ angular
 			'</div>'
 		);
 	}]);
+
+
+angular
+	.module('TT.angularPageSlider')
+	.directive('svgImage', svgImage);
+
+/* @ngAnnotate */
+function svgImage($http) {
+
+	'use strict';
+
+	return {
+		restrict: 'E',
+		link: function(scope, element) {
+			var request = $http.get(
+					element.attr('src'),
+					{'Content-Type': 'application/xml'}
+				);
+
+			scope.manipulateImgNode = function(data, elem) {
+				var svg = angular.element(data)[2],
+					imgClass = elem.attr('class');
+
+				if (typeof(imgClass) !== 'undefined') {
+					var classes = imgClass.split(' ');
+					for (var i = 0; i < classes.length; ++i) {
+						svg.classList.add(classes[i]);
+					}
+				}
+				svg.removeAttribute('xmlns:a');
+				return svg;
+			};
+
+			request.success(function(data) {
+				element.replaceWith(scope.manipulateImgNode(data, element));
+			});
+		}
+	};
+}
+svgImage.$inject = ["$http"];

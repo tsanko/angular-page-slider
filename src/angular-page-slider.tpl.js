@@ -42,7 +42,7 @@ angular
 				   'ng-if="slider.showPrev" ' +
 				   'ng-click="slider.prevSlide()" >' +
 
-					'<i class="fa fa-chevron-left"></i>' +
+					'<svg-image src="bower_components/angular-page-slider/dist/images/chevron.svg" class="chevron" ></svg-image>' +
 					'<div class="label">{{ slider.prevLabel }}</div>' +
 				'</a>' +
 
@@ -51,14 +51,14 @@ angular
 				   'ng-click="slider.nextSlide()" >' +
 
 					'<div class="label">{{ slider.nextLabel }}</div>' +
-					'<i class="fa fa-chevron-right"></i>' +
+					'<svg-image src="bower_components/angular-page-slider/dist/images/chevron.svg" class="chevron" ></svg-image>' +
 				'</a>' +
 
 				'<a class="arrow up" href ' +
 				   'ng-if="slider.showUp" ' +
 				   'ng-click="slider.upSlide()" >' +
 
-					'<i class="fa fa-chevron-up"></i>' +
+					'<svg-image src="bower_components/angular-page-slider/dist/images/chevron.svg" class="chevron" ></svg-image>' +
 					'<div class="label">{{ slider.upLabel }}</div>' +
 				'</a>' +
 
@@ -67,7 +67,7 @@ angular
 				   'ng-click="slider.downSlide()" >' +
 
 					'<div class="label">{{ slider.downLabel }}</div>' +
-					'<i class="fa fa-chevron-down"></i>' +
+					'<svg-image src="bower_components/angular-page-slider/dist/images/chevron.svg" class="chevron" ></svg-image>' +
 				'</a>' +
 
 				'<div class="main-map">' +

@@ -17,7 +17,7 @@ module.exports = function (config) {
 			'bower_components/gsap/src/uncompressed/TweenMax.js',
 			'bower_components/angular-swipe/dist/angular-swipe.js',
 
-			'src/*.js',
+			'src/**/*.js',
 			'test/spec/*.js'
 			//{pattern: '**/*.js', watched: true, included: true, served: true}
 		],

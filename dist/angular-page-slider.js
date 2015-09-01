@@ -1,6 +1,6 @@
 /**
  * angular-page-slider
- * @version v0.0.5 - 2015-09-01
+ * @version v0.0.6 - 2015-09-01
  * @link https://github.com/tsanko/angular-page-slider
  * @author Tsanko Tsolov <>
  * @license MIT License, http://www.opensource.org/licenses/MIT

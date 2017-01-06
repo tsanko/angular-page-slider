@@ -1,8 +1,8 @@
 // Karma configuration
 
-module.exports = function (config) {
+'use strict';
 
-	'use strict';
+module.exports = function (config) {
 
 	config.set({
 		// base path, that will be used to resolve files and exclude

@@ -1,9 +1,9 @@
 
 /*global xdescribe, spyOn */
 
-xdescribe('Directive: svgImage', function() {
+'use strict';
 
-	'use strict';
+xdescribe('Directive: svgImage', function() {
 
 	var $rootScope, $compile, element, scope, $httpBackend, apiUrl, data;
 

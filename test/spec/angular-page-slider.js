@@ -1,6 +1,8 @@
-describe('Module: angularPageSlider', function () {
 
-	'use strict';
+
+'use strict';
+
+describe('Module: angularPageSlider', function () {
 
 	var scope, $sandbox, $compile, $timeout;
 

@@ -1,10 +1,12 @@
 /**
  * angular-page-slider
- * @version v0.0.6 - 2015-09-01
+ * @version v0.0.6 - 2017-01-05
  * @link https://github.com/tsanko/angular-page-slider
  * @author Tsanko Tsolov <>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
+SliderController.$inject = ["$timeout"];
+svgImage.$inject = ["$http"];
 angular
 	.module('TT.angularPageSlider', ['ngAnimate'])
 	.animation('.slide-down-animation', function () {
@@ -314,7 +316,6 @@ function SliderController($timeout) {
 		setupLayoutChevrons();
 	}
 }
-SliderController.$inject = ["$timeout"];
 
 angular
 	.module('TT.angularPageSlider')
@@ -478,4 +479,3 @@ function svgImage($http) {
 		}
 	};
 }
-svgImage.$inject = ["$http"];

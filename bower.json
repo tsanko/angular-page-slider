@@ -1,6 +1,6 @@
 {
   "name": "angular-page-slider",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "homepage": "https://github.com/tsanko/angular-page-slider.git",
   "authors": [
     "Tsanko Tsolov"
@@ -25,16 +25,16 @@
   ],
   "dependencies": {
     "jquery": "~3.1.1",
-    "angular": "~1.6.0",
-    "angular-animate": "~1.6.0",
+    "angular": "~1.5.0",
+    "angular-animate": "~1.5.0",
     "compass-mixins": "~1.0.2",
     "gsap": "~1.19.0",
     "angular-swipe": "~0.2.0"
   },
   "devDependencies": {
-    "angular-mocks": "~1.6.0"
+    "angular-mocks": "~1.5.0"
   },
   "resolutions": {
-    "angular": "~1.6.0"
+    "angular": "~1.5.0"
   }
 }
